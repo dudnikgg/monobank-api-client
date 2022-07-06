@@ -5,7 +5,9 @@ class UserInfo {
    * @param {string} name
    * @param {Account[]} accounts
    */
-  constructor({ name, accounts }) {
+  constructor({ name, accounts, clientId, jars }) {
+    this._clientId = clientId;
+    this._jars = jars;
     this._name = name;
     this._accounts = accounts;
   }
@@ -22,6 +24,20 @@ class UserInfo {
    */
   get accounts() {
     return this._accounts;
+  }
+
+  /**
+   * @returns {Account[]}
+   */
+   get clientId() {
+    return this._clientId;
+  }
+
+  /**
+   * @returns {Account[]}
+   */
+   get jars() {
+    return this._jars;
   }
 }
 

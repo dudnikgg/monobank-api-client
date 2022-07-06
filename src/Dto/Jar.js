@@ -6,23 +6,23 @@ class Account {
   /**
    * @param {string} id
    * @param {int} balance
-   * @param {int} creditLimit
+   * @param {string} title
    * @param {int} currencyCode
-   * @param {string} type
-   * @param {string} cashbackType
+   * @param {string} description
+   * @param {string} goal
    */
-  constructor({ id, balance, creditLimit, currencyCode, type, cashbackType }) {
+  constructor({ id, balance, title, currencyCode, description, goal }) {
     this._id = id;
     this._balance = balance;
-    this._creditLimit = creditLimit;
-    this._type = type;
+    this._title = title;
     this._currencyCode = cc.number(currencyCode);
 
     if (typeof this._currencyCode === 'undefined') {
       throw new Error(`Invalid currencyCode value "${currencyCode}"`);
     }
 
-    this._cashbackType = cashbackType;
+    this._description = description;
+    this._goal = goal;
   }
 
   /**
@@ -40,10 +40,10 @@ class Account {
   }
 
   /**
-   * @returns {int}
+   * @returns {string}
    */
-  get creditLimit() {
-    return this._creditLimit;
+  get title() {
+    return this._title;
   }
 
   /**
@@ -56,15 +56,15 @@ class Account {
   /**
    * @returns {string}
    */
-   get type() {
-    return this._type;
+  get description() {
+    return this._description;
   }
 
   /**
    * @returns {string}
    */
-  get cashbackType() {
-    return this._cashbackType;
+   get goal() {
+    return this._goal;
   }
 }
 

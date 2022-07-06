@@ -4,6 +4,7 @@ const Endpoint = require('./Endpoint');
 const Transaction = require('./Dto/Transaction');
 const CurrencyInfo = require('./Dto/CurrencyInfo');
 const Account = require('./Dto/Account');
+const Jar = require('./Dto/Jar');
 const UserInfo = require('./Dto/UserInfo');
 const { BAD_REQUEST, FORBIDDEN, NOT_FOUND, UNAUTHORIZED, TOO_MANY_REQUESTS } = require('./HttpStatusCode');
 const {
@@ -73,9 +74,16 @@ class MonobankBaseApi {
         endpoint: Endpoint.CLIENT_INFO,
       });
 
-      const { name, accounts } = data;
+      const { name, accounts, clientId, jars } = data;
 
-      return new UserInfo({ name, accounts: accounts.map(v => new Account(v)) });
+      return new UserInfo(
+        {
+          name,
+          accounts: accounts.map(v => new Account(v)),
+          clientId,
+          jars: jars.map(j => new Jar(j))
+        }
+      );
     } catch (err) {
       if (err.isAxiosError) {
         const { status, data } = err.response;
